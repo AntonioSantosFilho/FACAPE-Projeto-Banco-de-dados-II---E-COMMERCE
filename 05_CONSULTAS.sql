@@ -223,3 +223,9 @@ GROUP BY c.id_cliente, c.nome, c.email, c.telefone, c.data_cadastro
 HAVING MAX(pe.data_pedido) IS NULL
     OR (CAST(CURRENT_TIMESTAMP AS DATE) - CAST(MAX(pe.data_pedido) AS DATE)) > 90
 ORDER BY ultima_compra ASC NULLS FIRST;
+
+/* ----------------------------------------------------------
+   C11. Cliente sem pedido
+   Pergunta: Quais clientes nunca realizaram nenhum pedido?
+   ---------------------------------------------------------- */
+SELECT nome FROM cliente WHERE id_cliente NOT IN (SELECT id_cliente FROM pedido);
